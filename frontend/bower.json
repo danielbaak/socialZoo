@@ -1,0 +1,23 @@
+{
+  "name": "frontend",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Daniel Baak <daniel.baak@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/danielbaak/deduce",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "satellizer": "~0.13.1"
+  },
+  "private": "true"
+}
