@@ -44,7 +44,7 @@ module.exports = {
 
       // Step 3. Exchange oauth token and oauth verifier for access token.
       request.post({ url: accessTokenUrl, oauth: accessTokenOauth }, function (err, response, accessToken) {
-        accessToken = qs.parse(accessToken)
+        accessToken = qs.parse(accessToken);
 
         var profileOauth = {
           consumer_key: config.TWITTER_KEY,
@@ -75,9 +75,11 @@ module.exports = {
                 
                 user = user[0];
                 
-                user.twitter = profile.id
-                user.displayName = user.displayName || profile.name
-                user.picture = user.picture || profile.profile_image_url.replace('_normal', '')
+                user.twitter = profile.id;
+                user.displayName = user.displayName || profile.name;
+                user.picture = user.picture || profile.profile_image_url.replace('_normal', '');
+                user.twitterToken = accessToken.oauth_token;
+                user.twitterSecret = accessToken.oauth_token_secret;
                 user.save(function (err, user) { 
                   res.send({ token: createJWT(user) })
                 })
@@ -92,7 +94,10 @@ module.exports = {
 
               User.create({
                 twitter: profile.id,
-                displayName: profile.name
+                displayName: profile.name,
+                picture: profile.picture,
+                twitterToken: accessToken.oauth_token,
+                twitterSecret: accessToken.oauth_token_secret
               }).exec(function (err, user) {
                 res.send({ token: createJWT(user) })
               })
