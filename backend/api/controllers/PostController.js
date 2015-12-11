@@ -13,6 +13,9 @@ module.exports = {
 	tweet: function (req, res) {
 
 		User.findOne(req.userId, function (err, user) {
+
+			console.log('message:', req.body.message);
+
 			var T = new Twit({
 				consumer_key: config.TWITTER_KEY,
 				consumer_secret: config.TWITTER_SECRET,
@@ -22,11 +25,12 @@ module.exports = {
 
 
 			T.post('statuses/update', {
-				status: 'hello world!'
+				status: req.body.message
 			}, function (err, data, response) {
-				if (!err) {
+				if (err) {
 					console.log(err);
 				}
+				res.status(200).end();
 			});
 		});
 	}

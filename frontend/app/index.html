@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="app">
+
 <head>
   <title>My index</title>
   <!-- vendorInject:css -->
@@ -8,16 +9,36 @@
   <!-- inject:css -->
   <!-- endinject -->
 </head>
-<body ng-controller="Login">
-  {{user.name}}
-  {{user.email}}
-<button ng-click="login()">login</button>
-<button ng-click="tweet()">tweet</button>
 
+<body ng-controller="Authentication">
+
+  <nav class="navbar navbar-default">
+    <button ng-hide="isAuthenticated()" class="btn navbar-btn btn-primary pull-right" ng-click="login()">login / register</button>
+    <button ng-show="isAuthenticated()" class="btn navbar-btn btn-link pull-right" ng-click="logout()">logout</button>
+  </nav>
+
+  <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
+    <div ng-controller="Scheduler" ng-show="isAuthenticated()" class="well clearfix">
+      <div class="form-group">
+        <textarea class="form-control" ng-model="message" placeholder="tweet message..." rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" uib-datepicker-popup ng-model="date" is-open="opened" min-date="today">
+          <span class="input-group-btn">
+          <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+        </div>
+        <uib-timepicker ng-model="time"></uib-timepicker>
+      </div>
+      <button class="btn btn-default pull-right" ng-disabled="!date" ng-click="tweet()">tweet</button>
+    </div>
+  </div>
   <!-- vendorInject:js -->
   <!-- endinject -->
 
   <!-- inject:js -->
   <!-- endinject -->
 </body>
+
 </html>

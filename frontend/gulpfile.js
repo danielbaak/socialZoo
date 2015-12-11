@@ -6,7 +6,7 @@ var pako = require('gulp-pako')
 var del = require('del')
 
 var paths = {
-  app: 'app/**/*.js',
+  app: 'app/**/*',
   bower: 'bower_components/**/*',
   index: 'app/index.html',
   tmp: '.tmp',
